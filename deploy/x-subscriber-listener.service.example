@@ -1,0 +1,23 @@
+[Unit]
+Description=X Subscriber Listener (read-only, alert-first)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=udit_raikhere11
+WorkingDirectory=/home/udit_raikhere11/X-Subscriber-Listener
+EnvironmentFile=/home/udit_raikhere11/.config/x-subscriber-listener/.env
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/home/udit_raikhere11/X-Subscriber-Listener/.venv/bin/python -m x_listener.cli
+Restart=on-failure
+RestartSec=30
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=false
+ReadWritePaths=/home/udit_raikhere11/.local/share/x-subscriber-listener
+
+[Install]
+WantedBy=multi-user.target
